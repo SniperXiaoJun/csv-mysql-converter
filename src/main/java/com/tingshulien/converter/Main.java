@@ -8,14 +8,27 @@ import java.io.IOException;
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-    private static CSVParser parser = new ApacheCSVParser();
+
+    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter());
 
     public static void main(String[] args) throws IOException {
         String path = args[0];
 
-        CSVFile file = parser.parse(path);
+        String fileContent = converter.convert(path);
 
+        LOGGER.info("Last word is " + fileContent.substring(fileContent.length()));
 
+//        String sep = System.getProperty("line.separator");
+//
+//        if (fileContent.trim().endsWith(sep)) {
+//            fileContent = fileContent.replaceAll("[" + sep + "]$", "");
+//        }
+
+        if (fileContent.trim().endsWith(",")) {
+            fileContent = fileContent.replaceAll("[,]$", ";");
+        }
+
+        LOGGER.info("File content : " + "[" + fileContent + "]");
 
 //        Reader in = new FileReader(path);
 //

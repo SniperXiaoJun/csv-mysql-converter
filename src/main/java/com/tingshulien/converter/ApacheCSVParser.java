@@ -18,21 +18,22 @@ public class ApacheCSVParser implements CSVParser {
                 .withTrim()
                 .parse(in);
 
-        ArrayList<ArrayList<CSVFile.Cell>> rows = new ArrayList<>();
+        ArrayList<ArrayList<Cell>> rows = new ArrayList<>();
 
         int rowIndex = 0;
         int columnIndex = 0;
 
         for (CSVRecord record : records) {
 
-            ArrayList<CSVFile.Cell> row = new ArrayList<>();
+            ArrayList<Cell> row = new ArrayList<>();
             rows.add(row);
 
             for (String content : record) {
-                row.add(CSVFile.Cell.of(rowIndex, columnIndex, content));
+                row.add(Cell.of(rowIndex, columnIndex, content));
                 columnIndex++;
             }
 
+            columnIndex = 0;
             rowIndex++;
         }
 

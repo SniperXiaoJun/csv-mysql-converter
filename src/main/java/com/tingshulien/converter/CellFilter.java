@@ -1,7 +1,7 @@
 package com.tingshulien.converter;
 
-public class CellFilter {
+public interface CellFilter {
 
-
+    boolean examine(Cell cell);
 
 }
