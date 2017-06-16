@@ -13,55 +13,24 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         String path = args[0];
+        
+        try {
+            String fileContent = converter.convert(path);
 
-        String fileContent = converter.convert(path);
+            LOGGER.info("Last word is " + fileContent.substring(fileContent.length()));
 
-        LOGGER.info("Last word is " + fileContent.substring(fileContent.length()));
+            if (fileContent.trim().endsWith(",")) {
+                fileContent = fileContent.replaceAll("[,]$", ";");
+            }
 
-//        String sep = System.getProperty("line.separator");
-//
-//        if (fileContent.trim().endsWith(sep)) {
-//            fileContent = fileContent.replaceAll("[" + sep + "]$", "");
-//        }
+            LOGGER.info("File content : " + "[" + fileContent + "]");
 
-        if (fileContent.trim().endsWith(",")) {
-            fileContent = fileContent.replaceAll("[,]$", ";");
+            System.out.println(fileContent);
+            System.exit(0);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            System.exit(1);
         }
-
-        LOGGER.info("File content : " + "[" + fileContent + "]");
-
-//        Reader in = new FileReader(path);
-//
-//        Iterable<CSVRecord> records = CSVFormat.RFC4180
-//                .withTrim()
-//                .parse(in);
-//
-//        ArrayList<ArrayList<String>> rows = new ArrayList<>();
-//
-//        for (CSVRecord record : records) {
-//            ArrayList<String> row = new ArrayList<>();
-//            rows.add(row);
-//
-//            for (String cell : record) {
-//                row.add(cell);
-//            }
-//        }
-//
-//        RowCropper cropper = RowCropper.builder()
-//                .columnCount(1)
-//                .matcher(AnchorMatcher.TRUNCATE)
-//                .rowFilter(RowFilter.EXCLUDE_ONLY_COMMA_BRACKET)
-//                .mapper(RowMapper.DEFAULT)
-//                .build();
-//
-//        ArrayList<ArrayList<String>> croppedRows = cropper.crop(rows);
-//
-//
-//        StringBuilder sb = new StringBuilder();
-//
-//        croppedRows.forEach(row -> sb.append(row.get(0)).append("\n"));
-//
-//        LOGGER.info("Cropped Rows is " + sb.toString());
     }
 
 }
