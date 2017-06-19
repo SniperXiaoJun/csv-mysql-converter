@@ -9,7 +9,7 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter());
+    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter().andNot(new EmptyCellFilter()).andNot(new OnlyCurlyBracketSingleQuotationCommaFilter()));
 
     public static void main(String[] args) throws IOException {
         String path = args[0];

@@ -3,15 +3,19 @@ package com.tingshulien.converter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public abstract class CsvCellFilter implements CellFilter {
 
     public abstract boolean examine(Cell cell);
 
     public CsvCellFilter and(CsvCellFilter other) {
+        checkNotNull(other, "Cell filter must not be null");
         return new AndSpecification(this, other);
     }
 
     public CsvCellFilter andNot(CsvCellFilter other) {
+        checkNotNull(other, "Cell filter must not be null");
         return new AndNotSpecification(this, other);
     }
 
@@ -24,6 +28,7 @@ public abstract class CsvCellFilter implements CellFilter {
 
         @Override
         public boolean examine(Cell cell){
+            checkNotNull(cell, "Cell must not be null");
             return left.examine(cell) && right.examine(cell);
         }
 
@@ -37,7 +42,8 @@ public abstract class CsvCellFilter implements CellFilter {
         final private CsvCellFilter right;
 
         @Override
-        public boolean examine(Cell cell){
+        public boolean examine(Cell cell) {
+            checkNotNull(cell, "Cell must not be null");
             return left.examine(cell) && ! right.examine(cell);
         }
 

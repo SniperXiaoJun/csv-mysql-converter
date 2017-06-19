@@ -5,15 +5,16 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public class CSVFile {
+class CSVFile {
 
     private static String separator = System.getProperty("line.separator");
 
+    private String path;
     private ArrayList<ArrayList<Cell>> rows;
     private int rowCount;
     private int columnCount;
 
-    public void filter(CellFilter cellFilter) {
+    void filter(CellFilter cellFilter) {
         for (ArrayList<Cell> row : rows) {
             for (Cell cell : row) {
                 if (cellFilter.examine(cell)) {
@@ -23,9 +24,13 @@ public class CSVFile {
         }
     }
 
-    public String print() {
+    String print() {
         StringBuilder sb = new StringBuilder();
         boolean validRow;
+
+        sb.append("# ===================================\n")
+                .append("# ").append(path).append("\n")
+                .append("# ===================================\n\n");
 
         for (ArrayList<Cell> row : rows) {
 
@@ -45,9 +50,10 @@ public class CSVFile {
         return sb.toString();
     }
 
-    public static CSVFile of (ArrayList<ArrayList<Cell>> rows) {
+    static CSVFile of(String path, ArrayList<ArrayList<Cell>> rows) {
         CSVFile file = new CSVFile();
 
+        file.path = path;
         file.rows = rows;
         file.rowCount = rows.size();
         file.columnCount = rows

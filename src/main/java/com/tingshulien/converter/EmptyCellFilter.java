@@ -3,9 +3,9 @@ package com.tingshulien.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NotEmptyCellFilter extends CsvCellFilter {
+public class EmptyCellFilter extends CsvCellFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NotEmptyCellFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmptyCellFilter.class);
 
     @Override
     public boolean examine(Cell cell) {
@@ -13,7 +13,7 @@ public class NotEmptyCellFilter extends CsvCellFilter {
             LOGGER.info("Possible empty cell is " + cell + " content is [" + cell.getContent() + "]");
         }
 
-        return ! cell.getContent().trim().isEmpty();
+        return cell.getContent().trim().isEmpty();
     }
 
 }

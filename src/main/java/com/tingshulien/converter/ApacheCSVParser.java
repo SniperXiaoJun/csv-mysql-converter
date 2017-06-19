@@ -7,11 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ApacheCSVParser implements CSVParser {
 
     @Override
-    public CSVFile parse(String path) throws IOException {
+    public Optional<CSVFile> parse(String path) throws IOException {
+        checkNotNull(path, "CSV file path must not be null");
+
         Reader in = new FileReader(path);
 
         Iterable<CSVRecord> records = CSVFormat.RFC4180
@@ -37,7 +42,7 @@ public class ApacheCSVParser implements CSVParser {
             rowIndex++;
         }
 
-        return CSVFile.of(rows);
+        return Optional.ofNullable(CSVFile.of(path, rows));
     }
 
 }
