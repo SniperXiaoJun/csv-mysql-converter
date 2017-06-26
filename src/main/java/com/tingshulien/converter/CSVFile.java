@@ -1,7 +1,10 @@
 package com.tingshulien.converter;
 
+import com.tingshulien.converter.filter.CellFilter;
 import lombok.Data;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @Data
@@ -9,7 +12,7 @@ class CSVFile {
 
     private static String separator = System.getProperty("line.separator");
 
-    private String path;
+    private Path path;
     private ArrayList<ArrayList<Cell>> rows;
     private int rowCount;
     private int columnCount;
@@ -29,7 +32,7 @@ class CSVFile {
         boolean validRow;
 
         sb.append("# ===================================\n")
-                .append("# ").append(path).append("\n")
+                .append("# ").append(path.getFileName()).append("\n")
                 .append("# ===================================\n\n");
 
         for (ArrayList<Cell> row : rows) {
@@ -53,7 +56,7 @@ class CSVFile {
     static CSVFile of(String path, ArrayList<ArrayList<Cell>> rows) {
         CSVFile file = new CSVFile();
 
-        file.path = path;
+        file.path = Paths.get(path);
         file.rows = rows;
         file.rowCount = rows.size();
         file.columnCount = rows

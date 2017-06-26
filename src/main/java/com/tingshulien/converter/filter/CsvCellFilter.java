@@ -1,5 +1,6 @@
-package com.tingshulien.converter;
+package com.tingshulien.converter.filter;
 
+import com.tingshulien.converter.Cell;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
