@@ -1,12 +1,8 @@
 package com.tingshulien.converter.filter;
 
 import com.tingshulien.converter.Cell;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TruncateColumnFilter extends CsvCellFilter {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TruncateColumnFilter.class);
 
     private int truncateRowIndex = 0;
     private int truncateColumnIndex = 0;
@@ -18,16 +14,18 @@ public class TruncateColumnFilter extends CsvCellFilter {
 
         String content = cell.getContent();
 
+        if (truncateExists) {
+            ok = cell.getRowIndex() > truncateRowIndex
+                    && cell.getColumnIndex() == truncateColumnIndex;
+
+            return ok;
+        }
+
         if (content.toLowerCase().contains("truncate")) {
             truncateRowIndex = cell.getRowIndex();
             truncateColumnIndex = cell.getColumnIndex();
             truncateExists = true;
-            LOGGER.info("Truncate cell : " + cell);
-        }
-
-        if (truncateExists) {
-            ok = cell.getRowIndex() >= truncateRowIndex
-                    && cell.getColumnIndex() == truncateColumnIndex;
+            ok = true;
         }
 
         return ok;

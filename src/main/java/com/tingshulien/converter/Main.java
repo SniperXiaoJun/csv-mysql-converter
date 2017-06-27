@@ -1,7 +1,7 @@
 package com.tingshulien.converter;
 
 import com.tingshulien.converter.filter.EmptyCellFilter;
-import com.tingshulien.converter.filter.OnlyCurlyBracketSingleQuotationCommaFilter;
+import com.tingshulien.converter.filter.BracketQuotationCommaSpaceOnlyFilter;
 import com.tingshulien.converter.filter.TruncateColumnFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter().andNot(new EmptyCellFilter()).andNot(new OnlyCurlyBracketSingleQuotationCommaFilter()));
+    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter().andNot(new EmptyCellFilter().or(new BracketQuotationCommaSpaceOnlyFilter())));
 
     public static void main(String[] args) throws IOException {
         String path = args[0];

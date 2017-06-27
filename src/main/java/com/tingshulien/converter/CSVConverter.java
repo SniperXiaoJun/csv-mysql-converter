@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Data
 class CSVConverter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CSVConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CSVConverter.class);
 
     final private CSVParser parser;
     final private CsvCellFilter filter;
@@ -26,7 +26,7 @@ class CSVConverter {
         try {
             optFile = parser.parse(path);
         } catch (IOException e) {
-            LOGGER.error("Parse CSV file error : ", e);
+            LOG.error("Parse CSV file error : ", e);
         }
 
         checkNotNull(optFile, "CSV file optional must not be null");
@@ -39,7 +39,7 @@ class CSVConverter {
 
         file.filter(filter);
 
-        LOGGER.info("File data : " + file);
+        LOG.info("File data : " + file);
 
         return file.print();
     }
