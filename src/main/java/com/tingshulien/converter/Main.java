@@ -1,12 +1,11 @@
 package com.tingshulien.converter;
 
-import com.tingshulien.converter.filter.EmptyCellFilter;
 import com.tingshulien.converter.filter.BracketQuotationCommaSpaceOnlyFilter;
+import com.tingshulien.converter.filter.EmptyCellFilter;
 import com.tingshulien.converter.filter.TruncateColumnFilter;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class Main {
 

@@ -1,8 +1,8 @@
 package com.tingshulien.converter.filter;
 
-import com.tingshulien.converter.Cell;
-
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.tingshulien.converter.Cell;
 
 public abstract class CsvCellFilter implements CellFilter {
 
@@ -16,7 +16,7 @@ public abstract class CsvCellFilter implements CellFilter {
         return new AndNotSpecification(this, other);
     }
 
-    private class OrSpecification extends CsvCellFilter {
+    private static class OrSpecification extends CsvCellFilter {
 
         final private CsvCellFilter left;
         final private CsvCellFilter right;
@@ -34,7 +34,7 @@ public abstract class CsvCellFilter implements CellFilter {
 
     }
 
-    private class AndNotSpecification extends CsvCellFilter {
+    private static class AndNotSpecification extends CsvCellFilter {
 
         final private CsvCellFilter left;
         final private CsvCellFilter right;

@@ -1,23 +1,24 @@
 package com.tingshulien.converter;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.FileReader;
+import com.google.common.io.Files;
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 public class ApacheCSVParser implements CSVParser {
 
     @Override
-    public Optional<CSVFile> parse(String path) throws IOException {
+    public Optional<CSVFile> parse(final String path) throws IOException {
         checkNotNull(path, "CSV file path must not be null");
 
-        Reader in = new FileReader(path);
+        Reader in = Files.newReader(new File(path), StandardCharsets.UTF_8);
 
         Iterable<CSVRecord> records = CSVFormat.RFC4180
                 .withTrim()

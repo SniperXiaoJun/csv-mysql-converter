@@ -1,11 +1,10 @@
 package com.tingshulien.converter;
 
 import com.tingshulien.converter.filter.CellFilter;
-import lombok.Data;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import lombok.Data;
 
 @Data
 class CSVFile {

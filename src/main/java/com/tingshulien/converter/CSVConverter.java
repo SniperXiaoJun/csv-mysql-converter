@@ -1,14 +1,13 @@
 package com.tingshulien.converter;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.tingshulien.converter.filter.CsvCellFilter;
+import java.io.IOException;
+import java.util.Optional;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @Data
 class CSVConverter {
