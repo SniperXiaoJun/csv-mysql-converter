@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 public class ApacheCSVParser implements CSVParser {
 
     @Override
-    public Optional<CSVFile> parse(final String path) throws IOException {
+    public CSVFile parse(final String path) throws IOException {
         checkNotNull(path, "CSV file path must not be null");
 
         Reader in = Files.newReader(new File(path), StandardCharsets.UTF_8);
@@ -24,14 +24,13 @@ public class ApacheCSVParser implements CSVParser {
                 .withTrim()
                 .parse(in);
 
-        ArrayList<ArrayList<Cell>> rows = new ArrayList<>();
+        List<List<Cell>> rows = new ArrayList<>();
 
         int rowIndex = 0;
         int columnIndex = 0;
 
         for (CSVRecord record : records) {
-
-            ArrayList<Cell> row = new ArrayList<>();
+            List<Cell> row = new ArrayList<>();
             rows.add(row);
 
             for (String content : record) {
@@ -43,7 +42,7 @@ public class ApacheCSVParser implements CSVParser {
             rowIndex++;
         }
 
-        return Optional.ofNullable(CSVFile.of(path, rows));
+        return CSVFile.of(path, rows);
     }
 
 }

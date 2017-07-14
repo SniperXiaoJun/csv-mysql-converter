@@ -1,13 +1,14 @@
 package com.tingshulien.converter.filter;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.tingshulien.converter.Cell;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
 
 @RunWith(JUnitPlatform.class)
 public class BracketQuotationCommaSpaceOnlyFilterTest {

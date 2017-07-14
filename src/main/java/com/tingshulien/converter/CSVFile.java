@@ -3,7 +3,7 @@ package com.tingshulien.converter;
 import com.tingshulien.converter.filter.CellFilter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -12,12 +12,12 @@ class CSVFile {
     private static String separator = System.getProperty("line.separator");
 
     private Path path;
-    private ArrayList<ArrayList<Cell>> rows;
+    private List<List<Cell>> rows;
     private int rowCount;
     private int columnCount;
 
     void filter(CellFilter cellFilter) {
-        for (ArrayList<Cell> row : rows) {
+        for (List<Cell> row : rows) {
             for (Cell cell : row) {
                 if (cellFilter.examine(cell)) {
                     cell.setFiltered(true);
@@ -34,7 +34,7 @@ class CSVFile {
                 .append("# ").append(path.getFileName()).append("\n")
                 .append("# ===================================\n\n");
 
-        for (ArrayList<Cell> row : rows) {
+        for (List<Cell> row : rows) {
 
             for (Cell cell : row) {
                 if (cell.isFiltered()) {
@@ -52,7 +52,7 @@ class CSVFile {
         return sb.toString();
     }
 
-    static CSVFile of(String path, ArrayList<ArrayList<Cell>> rows) {
+    static CSVFile of(String path, List<List<Cell>> rows) {
         CSVFile file = new CSVFile();
 
         file.path = Paths.get(path);
@@ -60,7 +60,7 @@ class CSVFile {
         file.rowCount = rows.size();
         file.columnCount = rows
                 .stream()
-                .mapToInt(ArrayList::size)
+                .mapToInt(List::size)
                 .max()
                 .orElse(0);
 

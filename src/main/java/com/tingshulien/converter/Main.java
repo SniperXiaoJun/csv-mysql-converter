@@ -9,29 +9,30 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
-    private static CSVConverter converter = new CSVConverter(new ApacheCSVParser(), new TruncateColumnFilter().andNot(new EmptyCellFilter().or(new BracketQuotationCommaSpaceOnlyFilter())));
+    private static ApacheCSVConverter converter = new ApacheCSVConverter(
+        new ApacheCSVParser(),
+        new TruncateColumnFilter()
+            .andNot(new EmptyCellFilter().or(new BracketQuotationCommaSpaceOnlyFilter())),
+        new LastCommaToSemicolonMapper()
+    );
 
     public static void main(String[] args) throws IOException {
         String path = args[0];
         
         try {
-            String fileContent = converter.convert(path);
+            String sql = converter.convert(path);
 
-            LOGGER.info("Last word is " + fileContent.substring(fileContent.length()));
-
-            if (fileContent.trim().endsWith(",")) {
-                fileContent = fileContent.replaceAll("[,]$", ";");
-            }
-
-            LOGGER.info("File content : " + "[" + fileContent + "]");
-
-            System.out.println(fileContent);
+            System.out.print(sql);
             System.exit(0);
+
+            LOG.debug("Successfully convert " + path + " to sql query as below\n" + sql);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             System.exit(1);
+
+            LOG.error("Failed to convert " + path + " to sql query", ex);
         }
     }
 

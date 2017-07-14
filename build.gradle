@@ -43,7 +43,6 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.7'
     compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M4'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0-M4'
     testCompile group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.0.0-M4'
