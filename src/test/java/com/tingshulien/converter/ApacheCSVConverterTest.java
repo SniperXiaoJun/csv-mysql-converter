@@ -1,20 +1,23 @@
 package com.tingshulien.converter;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.tingshulien.converter.filter.BracketQuotationCommaSpaceOnlyFilter;
 import com.tingshulien.converter.filter.EmptyCellFilter;
 import com.tingshulien.converter.filter.TruncateColumnFilter;
-import java.net.URL;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import java.net.URL;
+import java.nio.file.Paths;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 @RunWith(JUnitPlatform.class)
 public class ApacheCSVConverterTest {
 
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String CSV_FILE = "users.csv";
 
     private static URL url;
@@ -33,14 +36,16 @@ public class ApacheCSVConverterTest {
     }
 
     @Test
-    public void givenUsersCsvWhenConvertThenReturnSql() {
-        assertThat(converter.convert(url.getPath()), containsString(
-            "TRUNCATE  TABLE `users`;\n"
-            + "INSERT INTO `users` (`id`, `username`, `create_date`) VALUES\n"
-            + "(1,'alex','2017-01-01 00:00:00'),\n"
-            + "(2,'andy','2017-01-01 00:00:00'),\n"
-            + "(3,'tim','2017-01-01 00:00:00'),\n"
-            + "(4,'tom','2017-01-01 00:00:00'),\n"
+    public void givenUsersCsvWhenConvertThenReturnSql() throws Exception {
+        assertThat(
+                converter.convert(Paths.get(url.toURI()).toString()),
+                containsString(
+            "TRUNCATE  TABLE `users`;" + LINE_SEPARATOR
+            + "INSERT INTO `users` (`id`, `username`, `create_date`) VALUES" + LINE_SEPARATOR
+            + "(1,'alex','2017-01-01 00:00:00')," + LINE_SEPARATOR
+            + "(2,'andy','2017-01-01 00:00:00')," + LINE_SEPARATOR
+            + "(3,'tim','2017-01-01 00:00:00'),"  + LINE_SEPARATOR
+            + "(4,'tom','2017-01-01 00:00:00'),"  + LINE_SEPARATOR
             + "(5,'zoe','2017-01-01 00:00:00');"));
     }
 

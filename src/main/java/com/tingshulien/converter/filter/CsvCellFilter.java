@@ -1,8 +1,8 @@
 package com.tingshulien.converter.filter;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.tingshulien.converter.Cell;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class CsvCellFilter implements CellFilter {
 

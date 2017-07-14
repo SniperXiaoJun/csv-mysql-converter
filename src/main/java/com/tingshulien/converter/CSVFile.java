@@ -1,15 +1,16 @@
 package com.tingshulien.converter;
 
 import com.tingshulien.converter.filter.CellFilter;
+import lombok.Data;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import lombok.Data;
 
 @Data
 class CSVFile {
 
-    private static String separator = System.getProperty("line.separator");
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private Path path;
     private List<List<Cell>> rows;
@@ -45,7 +46,7 @@ class CSVFile {
             validRow = row.stream().anyMatch(Cell::isFiltered);
 
             if (validRow) {
-                sb.append(separator);
+                sb.append(LINE_SEPARATOR);
             }
         }
 

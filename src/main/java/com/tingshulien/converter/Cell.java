@@ -1,8 +1,8 @@
 package com.tingshulien.converter;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import lombok.Data;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 @Data
 public class Cell {

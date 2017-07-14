@@ -1,16 +1,17 @@
 package com.tingshulien.converter;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.common.io.Files;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ApacheCSVParser implements CSVParser {
 
