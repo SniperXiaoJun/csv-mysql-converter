@@ -1,11 +1,11 @@
 ## Simple CSV mysql converter 
 
-A simple command program to convert `predefined csv file` to *sql query*.      
+A simple command line program to convert `predefined csv file` to *MySQL query*.      
 
 
 ##### Predefined CSV file format
 
-Suppose your csv contains file format as below.   
+Suppose your csv file has following format.   
 
 | ``id`` | ``username`` | ``create_date``         | ``TRUNCATE,TABLE `users`; INSERT INTO `users` (`id`, `username`, `create_date`) VALUES"`` |
 |:---|:---------|:--------------------|:---------------------------------------------------------------------------------------|
@@ -16,9 +16,9 @@ Suppose your csv contains file format as below.
 | 5  | zoe      | 2017-01-01 00:00:00 | "(5,'zoe','2017-01-01 00:00:00'),"                                                     |
 
 
-#### Sql query
+#### MySQL query
 
-After conversion, csv file will be convert to follow sql query.
+After conversion, csv file will be converted into following MySQL query.
 
 ```sql
 TRUNCATE  TABLE `users`;
@@ -38,7 +38,7 @@ $ gradlew build
 
 #### Command
 
-Once build, your terminal shell can convert predefined csv file to sql query.
+Once built, the shell command can help you convert csv file into MySQL query.
 
 ```shell
 $ convert.sh /data/users.csv
