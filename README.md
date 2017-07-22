@@ -1,5 +1,7 @@
 ## Simple CSV mysql converter 
 
+[![Build Status](https://travis-ci.org/timlien/csv-mysql-converter.svg?branch=master)](https://travis-ci.org/timlien/csv-mysql-converter)
+
 A simple command line program to convert `predefined csv file` to *MySQL query*.      
 
 
